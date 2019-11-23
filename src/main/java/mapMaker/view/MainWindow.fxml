@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 
 <FlowPane alignment="CENTER" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapMaker.controllers.MainWindowController">
    <children>
-      <Label text="MapMaker" />
+      <BorderPane>
+         <top>
+            <Label text="MapMaker" BorderPane.alignment="CENTER" />
+         </top>
+         <center>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+         </center>
+         <bottom>
+            <Button fx:id="generateButton" mnemonicParsing="false" text="Generate" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
    </children>
 </FlowPane>
