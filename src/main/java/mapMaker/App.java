@@ -6,8 +6,13 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import mapMaker.controllers.MainWindowController;
+import mapMaker.generators.RandomMapGenerator;
+import mapMaker.map.Map;
+import mapMaker.viewers.MapViewer;
 
 public class App extends Application{
 	
@@ -26,7 +31,7 @@ public class App extends Application{
 	}
 
 	private Scene createScene() {
-		Pane pane = loadMainWindow();
+		Pane pane = buildMainWindow();
 		
 		if (pane == null)
 			pane = new Pane();
@@ -34,11 +39,10 @@ public class App extends Application{
 		return new Scene(pane,600, 400);
 	}
 
-	private Pane loadMainWindow() {
+	private Pane buildMainWindow() {
 		FXMLLoader loader = new FXMLLoader();
 
 		loader.setLocation(getClass().getResource("view/MainWindow.fxml"));
-		
 		Pane pane;
 		
 		try {
@@ -48,7 +52,17 @@ public class App extends Application{
 			return null;
 		}
 		
+		MainWindowController controller = loader.getController();
+		
+		controller.setGenerate(() -> {
+			Map map = new RandomMapGenerator().generate(300, 300);
+			MapViewer viewer = new MapViewer();
+			Canvas canvas = viewer.createView(map);
+			controller.setCanvas(canvas);
+		});
+		
 		
 		return pane;
 	}
+	
 }
