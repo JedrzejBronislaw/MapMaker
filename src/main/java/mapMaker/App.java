@@ -55,7 +55,10 @@ public class App extends Application{
 		MainWindowController controller = loader.getController();
 		
 		controller.setGenerate(() -> {
-			Map map = new RandomMapGenerator().generate(300, 300);
+			int width = controller.getWidth();
+			int height = controller.getHeight();
+			
+			Map map = new RandomMapGenerator().generate(width, height);
 			MapViewer viewer = new MapViewer();
 			Canvas canvas = viewer.createView(map);
 			controller.setCanvas(canvas);
