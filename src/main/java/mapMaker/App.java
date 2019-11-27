@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import mapMaker.GeneratorManager.Generator;
 import mapMaker.controllers.MainWindowController;
+import mapMaker.generators.MapGenerator;
 import mapMaker.generators.RandomMapGenerator;
 import mapMaker.map.Map;
 import mapMaker.viewers.MapViewer;
@@ -57,8 +59,9 @@ public class App extends Application{
 		controller.setGenerate(() -> {
 			int width = controller.getWidth();
 			int height = controller.getHeight();
+			Generator genType = controller.getGenerator();
 			
-			Map map = new RandomMapGenerator().generate(width, height);
+			Map map = GeneratorManager.get(genType).generate(width, height);
 			MapViewer viewer = new MapViewer();
 			Canvas canvas = viewer.createView(map);
 			controller.setCanvas(canvas);

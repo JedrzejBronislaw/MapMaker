@@ -7,12 +7,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.VBox;
 import lombok.Setter;
+import mapMaker.GeneratorManager.Generator;
 
 public class MainWindowController implements Initializable{
 
+	private Generator selectedGenerator = Generator.Random;
+	
 	@FXML
 	private Button generateButton;
 
@@ -23,6 +29,8 @@ public class MainWindowController implements Initializable{
 	private TextField widthField;
 	@FXML
 	private TextField heightField;
+	@FXML
+	private VBox generatorsBox;
 	
 	@Setter
 	private Runnable generate;
@@ -41,8 +49,26 @@ public class MainWindowController implements Initializable{
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		generateButton.setOnAction(e -> generate());
+		buildSelectGeneratorView();
 	}
 
+	private void buildSelectGeneratorView() {
+		RadioButton radio;
+		ToggleGroup group = new ToggleGroup();
+		generatorsBox.getChildren().clear();
+		
+		for(Generator g : Generator.values()) {
+			radio = new RadioButton(g.toString());
+			radio.setToggleGroup(group);
+			generatorsBox.getChildren().add(radio);
+			radio.setOnAction(e -> selectedGenerator = g);
+		}
+	}
+
+	public Generator getGenerator() {
+		return selectedGenerator;
+	}
+	
 	public int getWidth() {
 		int w;
 		
