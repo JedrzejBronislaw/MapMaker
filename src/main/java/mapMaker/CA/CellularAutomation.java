@@ -29,19 +29,16 @@ public class CellularAutomation {
 		Map newMap = new Map(w, h);
 		byte neighbors;
 		
+		newMap = map;//
+		
 		for(int x = 0; x<w; x++)
 			for(int y = 0; y<h; y++) {
 				neighbors = coutNeighbors(x,y);
 				
 				if(neighbors >= liveThreshold)
-					levelUP(map, x, y);
+					levelUP(newMap, x, y);
 				if(neighbors <= deathThreshold)
-					levelDown(map, x, y);
-				
-//				if(neighbors >= liveThreshold)
-//					levelUP(newMap, x, y);
-//				if(neighbors <= deathThreshold)
-//					levelDown(newMap, x, y);
+					levelDown(newMap, x, y);
 			}
 				
 		

@@ -15,14 +15,14 @@ public class CAMapGenerator implements MapGenerator {
 	@Override
 	public Map generate(int width, int height) {
 		Map map = new Map(width, height);
-		r = new Random(5);
+		r = new Random();
 		
 		for(int x=0; x < width; x++)
 			for(int y=0; y < height; y++)
 				map.set(x, y, randomField());
-//				map.set(x, y, randomField(0.6f));
+//				map.set(x, y, randomField(0.55f));
 
-		new CellularAutomation(map).compute(100);
+		map = new CellularAutomation(map).compute(10);
 		
 		return map;
 	}

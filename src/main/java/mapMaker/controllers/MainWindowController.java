@@ -3,14 +3,15 @@ package mapMaker.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import lombok.Setter;
 import mapMaker.GeneratorManager.Generator;
@@ -23,7 +24,7 @@ public class MainWindowController implements Initializable{
 	private Button generateButton;
 
 	@FXML
-	private ScrollPane mapPane;
+	private StackPane mapPane;
 
 	@FXML
 	private TextField widthField;
@@ -39,12 +40,22 @@ public class MainWindowController implements Initializable{
 	
 	public void setCanvas(Canvas canvas) {
 //		this.canvas = canvas;
-		mapPane.setContent(canvas);
+		
+		Platform.runLater(() -> {
+			mapPane.getChildren().clear();
+			mapPane.getChildren().add(canvas);
+		});
 	}
 	
 	private void generate() {
-		if(generate != null)
-			generate.run();
+		generateButton.setDisable(true);
+		
+		new Thread(() -> {
+			if(generate != null)
+				generate.run();
+			
+			Platform.runLater(() -> generateButton.setDisable(false));
+		}).start();
 	}
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
