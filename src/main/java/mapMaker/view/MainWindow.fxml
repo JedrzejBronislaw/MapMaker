@@ -31,7 +31,7 @@
          </content></ScrollPane>
    </center>
    <right>
-      <ScrollPane hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minWidth="150.0" BorderPane.alignment="CENTER">
          <content>
             <VBox prefHeight="200.0" spacing="10.0">
                <children>

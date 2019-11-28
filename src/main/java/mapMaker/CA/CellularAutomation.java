@@ -10,11 +10,12 @@ public class CellularAutomation {
 
 	@NonNull
 	private Map map;
-
-//	private boolean hasBoundary = true; //TODO version without bounduries
-	private byte liveThreshold = 5;
-	private byte deathThreshold = 3;
 	
+	private CAOptions options = new CAOptions();
+
+	public void setOptions(CAOptions options) {
+		this.options = (options == null) ? new CAOptions() : options;
+	}
 	
 	public Map compute(int iteration) {
 		for(int i=0; i<iteration; i++)
@@ -35,9 +36,9 @@ public class CellularAutomation {
 			for(int y = 0; y<h; y++) {
 				neighbors = coutNeighbors(x,y);
 				
-				if(neighbors >= liveThreshold)
+				if(neighbors >= options.upTreshold)
 					levelUP(newMap, x, y);
-				if(neighbors <= deathThreshold)
+				if(neighbors <= options.downThreshold)
 					levelDown(newMap, x, y);
 			}
 				
@@ -74,4 +75,5 @@ public class CellularAutomation {
 		
 		return n;
 	}
+
 }

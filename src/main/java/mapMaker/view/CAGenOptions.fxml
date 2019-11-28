@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox spacing="15.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapMaker.controllers.CAGenOptionsController">
+   <children>
+      <VBox spacing="5.0">
+         <children>
+            <Label text="Generations:" />
+            <TextField fx:id="generationsField" text="10" />
+         </children>
+      </VBox>
+      <VBox spacing="5.0">
+         <children>
+            <Label text="Up threshold:" />
+            <TextField fx:id="upThreshold" text="5" />
+            <Label text="Down threshold:" />
+            <TextField fx:id="downThreshold" text="3" />
+         </children>
+      </VBox>
+      <VBox spacing="5.0">
+         <children>
+            <Label text="Initial probability:" />
+            <TextField fx:id="initProbabilityThreshold" text="0.5" />
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>

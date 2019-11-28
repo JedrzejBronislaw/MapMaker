@@ -11,9 +11,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import mapMaker.GeneratorManager.Generator;
 import mapMaker.controllers.MainWindowController;
-import mapMaker.generators.MapGenerator;
-import mapMaker.generators.RandomMapGenerator;
 import mapMaker.map.Map;
+import mapMaker.view.View;
 import mapMaker.viewers.MapViewer;
 
 public class App extends Application{
@@ -25,6 +24,7 @@ public class App extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
+		View.load();
 		stage.setTitle("MapMaker");
 		stage.setScene(createScene());
 		stage.setOnCloseRequest(h -> Platform.exit());
@@ -38,7 +38,7 @@ public class App extends Application{
 		if (pane == null)
 			pane = new Pane();
 		
-		return new Scene(pane,600, 400);
+		return new Scene(pane, 600, 400);
 	}
 
 	private Pane buildMainWindow() {

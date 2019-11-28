@@ -9,8 +9,19 @@ import mapMaker.map.Map;
 public class CAMapGenerator implements MapGenerator {
 
 	private Random r;
-	private FieldType[] fields = FieldType.values();
 	
+	private CAGenOptions options;
+	
+	public void setOptions(CAGenOptions options) {
+		if(options == null)
+			this.options = new CAGenOptions();
+		else
+			this.options = options;
+	}
+	
+	public CAMapGenerator() {
+		options = new CAGenOptions();
+	}
 	
 	@Override
 	public Map generate(int width, int height) {
@@ -19,16 +30,13 @@ public class CAMapGenerator implements MapGenerator {
 		
 		for(int x=0; x < width; x++)
 			for(int y=0; y < height; y++)
-				map.set(x, y, randomField());
-//				map.set(x, y, randomField(0.55f));
+				map.set(x, y, randomField(options.initialProbability));
 
-		map = new CellularAutomation(map).compute(10);
+		CellularAutomation ca = new CellularAutomation(map);
+		ca.setOptions(options.getCaOptions());
+		map = ca.compute(options.generations);
 		
 		return map;
-	}
-
-	private FieldType randomField() {
-		return fields[r.nextInt(fields.length)];
 	}
 
 	private FieldType randomField(float p) {
