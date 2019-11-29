@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import mapMaker.GeneratorManager.Generator;
 import mapMaker.controllers.MainWindowController;
 import mapMaker.map.Map;
+import mapMaker.view.InitialStateViewManager;
 import mapMaker.view.View;
 import mapMaker.viewers.MapViewer;
 
@@ -25,6 +26,7 @@ public class App extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		View.load();
+		InitialStateViewManager.load();
 		stage.setTitle("MapMaker");
 		stage.setScene(createScene());
 		stage.setOnCloseRequest(h -> Platform.exit());
