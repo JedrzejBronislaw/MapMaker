@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
@@ -21,14 +22,22 @@
          </BorderPane.margin></Button>
    </bottom>
    <center>
-      <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <content>
-            <StackPane fx:id="mapPane">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </StackPane>
-         </content></ScrollPane>
+      <BorderPane BorderPane.alignment="CENTER">
+         <center>
+            <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+               <content>
+                  <StackPane fx:id="mapPane">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </StackPane>
+               </content>
+            </ScrollPane>
+         </center>
+         <bottom>
+            <ProgressBar fx:id="progressbar" maxWidth="1.7976931348623157E308" progress="0.0" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
    </center>
    <right>
       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minWidth="150.0" BorderPane.alignment="CENTER">

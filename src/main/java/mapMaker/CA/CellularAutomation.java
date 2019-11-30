@@ -1,26 +1,40 @@
 package mapMaker.CA;
 
+import java.util.function.Consumer;
+
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import mapMaker.Progressive;
 import mapMaker.map.FieldType;
 import mapMaker.map.Map;
 
 @RequiredArgsConstructor
-public class CellularAutomation {
+public class CellularAutomation implements Progressive {
 
 	@NonNull
 	private Map map;
 	
 	private CAOptions options = new CAOptions();
+	
+	@Setter
+	private Consumer<Float> progressListiner;
 
 	public void setOptions(CAOptions options) {
 		this.options = (options == null) ? new CAOptions() : options;
 	}
 	
 	public Map compute(int iteration) {
-		for(int i=0; i<iteration; i++)
-			map = compute();
 		
+		if(progressListiner != null)
+			progressListiner.accept(0f);
+		
+		for(int i=0; i<iteration; i++) {
+			map = compute();
+			
+			if(progressListiner != null)
+				progressListiner.accept(((float)(i+1)/iteration));
+		}
 		return map;
 	}
 	

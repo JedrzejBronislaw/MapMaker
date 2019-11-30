@@ -2,12 +2,14 @@ package mapMaker.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -35,8 +37,11 @@ public class MainWindowController implements Initializable{
 	@FXML
 	private VBox generatorsBox;
 	
+	@FXML
+	private ProgressBar progressbar;
+	
 	@Setter
-	private Runnable generate;
+	private Consumer<Consumer<Float>> generate;
 	
 //	private Canvas canvas;
 	
@@ -49,18 +54,30 @@ public class MainWindowController implements Initializable{
 		});
 	}
 	
+	private void updateProgressBar(float percentage) {
+		progressbar.setProgress(percentage);
+	}
+	
 	private void generate() {
 		generateButton.setDisable(true);
+		progressbar.setVisible(true);	
+		progressbar.setManaged(true);	
 		
 		new Thread(() -> {
 			if(generate != null)
-				generate.run();
+				generate.accept(percentage -> updateProgressBar(percentage));
 			
-			Platform.runLater(() -> generateButton.setDisable(false));
+			Platform.runLater(() -> {
+				generateButton.setDisable(false);
+				progressbar.setVisible(false);	
+				progressbar.setManaged(false);	
+			});
 		}).start();
 	}
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		progressbar.setVisible(false);	
+		progressbar.setManaged(false);	
 		generateButton.setOnAction(e -> generate());
 		buildSelectGeneratorView();
 	}

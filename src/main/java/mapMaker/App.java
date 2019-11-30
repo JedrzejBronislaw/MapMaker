@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import mapMaker.GeneratorManager.Generator;
 import mapMaker.controllers.MainWindowController;
+import mapMaker.generators.MapGenerator;
 import mapMaker.map.Map;
 import mapMaker.view.InitialStateViewManager;
 import mapMaker.view.View;
@@ -58,12 +59,14 @@ public class App extends Application{
 		
 		MainWindowController controller = loader.getController();
 		
-		controller.setGenerate(() -> {
+		controller.setGenerate((progressListiner) -> {
 			int width = controller.getWidth();
 			int height = controller.getHeight();
 			Generator genType = controller.getGenerator();
 			
-			Map map = GeneratorManager.get(genType).generate(width, height);
+			MapGenerator mapGenerator = GeneratorManager.get(genType);
+			mapGenerator.setProgressListiner(progressListiner);
+			Map map = mapGenerator.generate(width, height);
 			MapViewer viewer = new MapViewer();
 			Canvas canvas = viewer.createView(map);
 			controller.setCanvas(canvas);
