@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox spacing="10.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapMaker.controllers.caMapGenerator.CircleISGenController">
+   <children>
+      <VBox spacing="5.0">
+         <children>
+            <Label text="Circle radius:" />
+            <TextField fx:id="circleRField" text="100" />
+         </children>
+      </VBox>
+      <VBox spacing="5.0">
+         <children>
+            <Label text="Centre radius:" />
+            <TextField fx:id="centreRField" text="50" />
+         </children>
+      </VBox>
+      <VBox spacing="5.0">
+         <children>
+            <Label text="Center X:" />
+            <TextField fx:id="centreXField" text="0.5" />
+         </children>
+      </VBox>
+      <VBox spacing="5.0">
+         <children>
+            <Label text="Centre Y:" />
+            <TextField fx:id="centreYField" text="0.5" />
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>

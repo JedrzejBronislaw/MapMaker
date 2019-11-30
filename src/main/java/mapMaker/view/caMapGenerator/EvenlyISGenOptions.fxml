@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox spacing="5.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapMaker.controllers.caMapGenerator.EvenlyISGenController">
+<VBox spacing="10.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapMaker.controllers.caMapGenerator.EvenlyISGenController">
    <children>
       <VBox spacing="5.0">
          <children>
             <Label text="Initial probability:" />
-            <TextField fx:id="probabilityField" disable="true" text="0.5" />
+            <TextField fx:id="probabilityField" text="0.5" />
          </children>
       </VBox>
    </children>

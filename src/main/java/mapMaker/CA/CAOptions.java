@@ -1,6 +1,8 @@
 package mapMaker.CA;
 
-public class CAOptions {
+import mapMaker.optionInterfaces.Options;
+
+public class CAOptions implements Options{
 	
 //	private boolean hasBoundary = true; 
 	

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javafx.fxml.Initializable;
 import mapMaker.GeneratorManager.Generator;
+import mapMaker.optionInterfaces.OptionsController;
 
 public class View {
 
@@ -26,6 +27,8 @@ public class View {
 				try {
 					window = new Window(g.getOptionsFXML());
 					window.setTitle(g.toString() + " options");
+					if (!(window.getController() instanceof OptionsController))
+						throw new IllegalArgumentException("Controller doesn't implement " + OptionsController.class);
 				} catch (IOException | IllegalArgumentException e) {
 					e.printStackTrace();
 					window = null;

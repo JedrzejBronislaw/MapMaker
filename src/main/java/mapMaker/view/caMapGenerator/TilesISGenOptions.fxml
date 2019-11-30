@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox spacing="10.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapMaker.controllers.caMapGenerator.TilesISGenController">
+   <children>
+      <VBox spacing="5.0">
+         <children>
+            <Label text="Tiles X:" />
+            <TextField fx:id="tilesXField" text="10" />
+         </children>
+      </VBox>
+      <VBox spacing="5.0">
+         <children>
+            <Label text="Tiles Y:" />
+            <TextField fx:id="tilesYField" text="10" />
+         </children>
+      </VBox>
+      <VBox spacing="5.0">
+         <children>
+            <Label text="High probability:" />
+            <TextField fx:id="highProbabilityField" text="1" />
+         </children>
+      </VBox>
+      <VBox spacing="5.0">
+         <children>
+            <Label text="Low probability:" />
+            <TextField fx:id="lowProbabilityField" text="0" />
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>

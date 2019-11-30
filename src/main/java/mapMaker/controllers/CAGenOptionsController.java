@@ -14,9 +14,10 @@ import javafx.scene.layout.VBox;
 import lombok.Getter;
 import mapMaker.generators.CAGenOptions;
 import mapMaker.generators.caMapGenerator.InitialStateGenerators.InitialStateGeneratorManager.InitialStateGeneratorType;
+import mapMaker.optionInterfaces.OptionsController;
 import mapMaker.view.InitialStateViewManager;
 
-public class CAGenOptionsController implements Initializable{
+public class CAGenOptionsController implements Initializable, OptionsController{
 
 	@FXML
 	private TextField generationsField;
@@ -80,6 +81,7 @@ public class CAGenOptionsController implements Initializable{
 //		options.initialProbability = Float.parseFloat(initProbabilityThreshold.getText()); TODO
 		options.getCaOptions().upTreshold = Byte.parseByte(upThreshold.getText());
 		options.getCaOptions().downThreshold = Byte.parseByte(downThreshold.getText());
+		options.initialStateGeneratorType = selectedGenerator;
 		
 		return options;
 	}

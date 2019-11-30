@@ -1,10 +1,10 @@
 package mapMaker;
 
 import lombok.Getter;
-import mapMaker.controllers.CAGenOptionsController;
 import mapMaker.generators.CAMapGenerator;
 import mapMaker.generators.MapGenerator;
 import mapMaker.generators.RandomMapGenerator;
+import mapMaker.optionInterfaces.OptionsController;
 import mapMaker.view.View;
 
 public class GeneratorManager {
@@ -39,7 +39,7 @@ public class GeneratorManager {
 	private static MapGenerator newCAMapGenerator() {
 		CAMapGenerator generator = new CAMapGenerator();
 		
-		CAGenOptionsController controller = (CAGenOptionsController) View.getGeneratorOptionsController(Generator.Generator1);
+		OptionsController controller = (OptionsController) View.getGeneratorOptionsController(Generator.Generator1);
 		
 		generator.setOptions(controller.getOptions());
 		

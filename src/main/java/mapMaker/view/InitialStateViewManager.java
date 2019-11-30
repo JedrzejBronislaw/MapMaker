@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import mapMaker.GeneratorManager.Generator;
 import mapMaker.generators.caMapGenerator.InitialStateGenerators.InitialStateGeneratorManager.InitialStateGeneratorType;
+import mapMaker.optionInterfaces.Options;
+import mapMaker.optionInterfaces.OptionsController;
 import mapMaker.tools.MyFXMLLoader;
 import mapMaker.tools.MyFXMLLoader.NodeAndController;
 
@@ -31,6 +32,8 @@ public class InitialStateViewManager {
 			else {
 				try {
 					nac = loader.create(viewDir + g.getOptionsFXML());
+					if (!(nac.getController() instanceof OptionsController))
+						throw new IllegalArgumentException("Controller doesn't implement " + OptionsController.class);
 				} catch (IOException e) {
 					e.printStackTrace();
 					nac = null;
@@ -40,11 +43,11 @@ public class InitialStateViewManager {
 		}
 	}
 	
-	public static Initializable getGeneratorOptionsController(InitialStateGeneratorType g) {
+	public static Options getGeneratorOptions(InitialStateGeneratorType g) {
 		NodeAndController nac = initialStateGeneratorsOptionsViews.get(g);
 
 		if (nac != null)
-			return nac.getController();
+			return ((OptionsController) nac.getController()).getOptions();
 		else
 			return null;	
 	}
