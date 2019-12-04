@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import mapMaker.generators.caMapGenerator.InitialStateGenerators.TilesISGenOptions;
 import mapMaker.optionInterfaces.Options;
 import mapMaker.optionInterfaces.OptionsController;
+import mapMaker.validators.FloatValidator;
 
 public class TilesISGenController implements Initializable, OptionsController{
 
@@ -29,6 +30,14 @@ public class TilesISGenController implements Initializable, OptionsController{
 		tilesYField.setText(Integer.toString(options.tilesY));
 		highProbabilityField.setText(Float.toString(options.highProbability));
 		lowProbabilityField.setText(Float.toString(options.lowProbability));
+
+		FloatValidator tilesValidator = new FloatValidator(-1, 2);
+		tilesValidator.add(tilesXField);
+		tilesValidator.add(tilesYField);
+		
+		FloatValidator probabilityValidator = new FloatValidator(0, 1);
+		probabilityValidator.add(highProbabilityField);
+		probabilityValidator.add(lowProbabilityField);
 	}
 
 	@Override

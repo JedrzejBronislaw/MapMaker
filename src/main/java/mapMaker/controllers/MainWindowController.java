@@ -18,6 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import lombok.Setter;
 import mapMaker.GeneratorManager.Generator;
+import mapMaker.validators.IntegerValidator;
 import mapMaker.view.View;
 
 public class MainWindowController implements Initializable{
@@ -80,6 +81,10 @@ public class MainWindowController implements Initializable{
 		progressbar.setManaged(false);	
 		generateButton.setOnAction(e -> generate());
 		buildSelectGeneratorView();
+		
+		IntegerValidator intValidator = new IntegerValidator(10, 1000000);
+		intValidator.add(heightField);
+		intValidator.add(widthField);
 	}
 
 	private void buildSelectGeneratorView() {

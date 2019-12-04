@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import mapMaker.generators.caMapGenerator.InitialStateGenerators.CircleISGenOptions;
 import mapMaker.optionInterfaces.Options;
 import mapMaker.optionInterfaces.OptionsController;
+import mapMaker.validators.FloatValidator;
+import mapMaker.validators.IntegerValidator;
 
 public class CircleISGenController implements Initializable, OptionsController{
 
@@ -29,6 +31,14 @@ public class CircleISGenController implements Initializable, OptionsController{
 		centreYField.setText(Float.toString(options.centreY));
 		centreRField.setText(Integer.toString(options.centreR));
 		circleRField.setText(Integer.toString(options.circleR));
+		
+		FloatValidator centreValidator = new FloatValidator(-1, 2);
+		centreValidator.add(centreXField);
+		centreValidator.add(centreYField);
+		
+		IntegerValidator sizeValidator =new IntegerValidator(0, 1000000);
+		sizeValidator.add(centreRField);
+		sizeValidator.add(circleRField);
 	}
 
 	@Override

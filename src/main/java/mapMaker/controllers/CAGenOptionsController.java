@@ -15,6 +15,7 @@ import lombok.Getter;
 import mapMaker.generators.CAGenOptions;
 import mapMaker.generators.caMapGenerator.InitialStateGenerators.InitialStateGeneratorManager.InitialStateGeneratorType;
 import mapMaker.optionInterfaces.OptionsController;
+import mapMaker.validators.IntegerValidator;
 import mapMaker.view.InitialStateViewManager;
 
 public class CAGenOptionsController implements Initializable, OptionsController{
@@ -46,6 +47,13 @@ public class CAGenOptionsController implements Initializable, OptionsController{
 //		initProbabilityThreshold.setText(Float.toString(defaultOptions.initialProbability)); TODO
 		
 		buildSelectGeneratorView();
+		
+		IntegerValidator thresholdsValidator = new IntegerValidator(0, 8);
+		thresholdsValidator.add(upThreshold);
+		thresholdsValidator.add(downThreshold);
+
+		IntegerValidator generationsValidator = new IntegerValidator(0, 1000000);
+		generationsValidator.add(generationsField);
 	}
 	
 	private void buildSelectGeneratorView() {

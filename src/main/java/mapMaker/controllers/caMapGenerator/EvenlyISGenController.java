@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import mapMaker.generators.caMapGenerator.InitialStateGenerators.EvenlyISGenOptions;
 import mapMaker.optionInterfaces.Options;
 import mapMaker.optionInterfaces.OptionsController;
+import mapMaker.validators.FloatValidator;
 
 public class EvenlyISGenController implements Initializable, OptionsController{
 	
@@ -20,6 +21,9 @@ public class EvenlyISGenController implements Initializable, OptionsController{
 		EvenlyISGenOptions options = new EvenlyISGenOptions();
 		
 		probabilityField.setText(Float.toString(options.probability));
+		
+		FloatValidator probabilityValidator = new FloatValidator(0, 1);
+		probabilityValidator.add(probabilityField);
 	}
 
 	@Override

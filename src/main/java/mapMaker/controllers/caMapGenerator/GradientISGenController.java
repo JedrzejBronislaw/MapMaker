@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import mapMaker.generators.caMapGenerator.InitialStateGenerators.GradientISGenOptions;
 import mapMaker.optionInterfaces.Options;
 import mapMaker.optionInterfaces.OptionsController;
+import mapMaker.validators.FloatValidator;
 
 public class GradientISGenController implements Initializable, OptionsController{
 
@@ -23,6 +24,10 @@ public class GradientISGenController implements Initializable, OptionsController
 		
 		startProbabilityField.setText(Float.toString(options.startProbability));
 		endProbabilityField.setText(Float.toString(options.endProbability));
+		
+		FloatValidator probabilityValidator = new FloatValidator(0, 1);
+		probabilityValidator.add(startProbabilityField);
+		probabilityValidator.add(endProbabilityField);
 	}
 
 	@Override
