@@ -44,7 +44,8 @@ public class CellularAutomation implements Progressive {
 		Map newMap = new Map(w, h);
 		byte neighbors;
 		
-		newMap = map;//
+		if(options.inSitu)
+			newMap = map;
 		
 		for(int x = 0; x<w; x++)
 			for(int y = 0; y<h; y++) {
@@ -52,8 +53,10 @@ public class CellularAutomation implements Progressive {
 				
 				if(neighbors >= options.upTreshold)
 					levelUP(newMap, x, y);
-				if(neighbors <= options.downThreshold)
+				else if(neighbors <= options.downThreshold)
 					levelDown(newMap, x, y);
+				else
+					setField(newMap, x, y, map.get(x, y));
 			}
 				
 		
@@ -66,6 +69,10 @@ public class CellularAutomation implements Progressive {
 
 	private void levelDown(Map map, int x, int y) {
 		map.set(x, y, FieldType.Water);
+	}
+
+	private void setField(Map map, int x, int y, FieldType field) {
+		map.set(x, y, field);
 	}
 
 	private byte coutNeighbors(int x, int y) {

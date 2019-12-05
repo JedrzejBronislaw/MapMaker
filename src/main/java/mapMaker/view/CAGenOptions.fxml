@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -23,6 +26,22 @@
                   <TextField fx:id="upThreshold" text="5" />
                   <Label text="Down threshold:" />
                   <TextField fx:id="downThreshold" text="3" />
+               </children>
+            </VBox>
+            <VBox disable="true" spacing="5.0">
+               <children>
+                  <Label text="Neighborhood:" />
+                  <RadioButton fx:id="mooreNeighborhood" mnemonicParsing="false" selected="true" text="Moore">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="neighborhood" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="vonNeumannNeighborhood" mnemonicParsing="false" text="von Neumann" toggleGroup="$neighborhood" />
+               </children>
+            </VBox>
+            <VBox spacing="5.0">
+               <children>
+                  <CheckBox fx:id="inSitu" mnemonicParsing="false" selected="true" text="in situ" />
                </children>
             </VBox>
          </children>
