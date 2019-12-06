@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import mapMaker.Progressive;
+import mapMaker.CA.CAOptions.Neighborhood;
 import mapMaker.map.FieldType;
 import mapMaker.map.Map;
 
@@ -76,6 +77,15 @@ public class CellularAutomation implements Progressive {
 	}
 
 	private byte coutNeighbors(int x, int y) {
+		if (options.neighborhood == Neighborhood.Moore)
+			return countMooreNeighbors(x, y);
+		if (options.neighborhood == Neighborhood.vonNeumann)
+			return countVonNeumannNeighbors(x, y);
+		
+		return 0;
+	}
+	
+	private byte countMooreNeighbors(int x, int y) {
 		byte n = 0;
 		
 		if(x > 0) {
@@ -90,6 +100,18 @@ public class CellularAutomation implements Progressive {
 			if ((y < map.getHeight()) && (map.get(x+1, y+1) == FieldType.Land)) n++;
 		}
 		
+		if ((y > 0) && (map.get(x, y-1) == FieldType.Land)) n++;
+		if ((y < map.getHeight()) && (map.get(x, y+1) == FieldType.Land)) n++;
+		
+		
+		return n;
+	}
+	
+	private byte countVonNeumannNeighbors(int x, int y) {
+		byte n = 0;
+		
+		if ((x > 0) && (map.get(x-1, y) == FieldType.Land)) n++;
+		if ((x < map.getWidth()-1) && (map.get(x+1, y) == FieldType.Land)) n++;
 		if ((y > 0) && (map.get(x, y-1) == FieldType.Land)) n++;
 		if ((y < map.getHeight()) && (map.get(x, y+1) == FieldType.Land)) n++;
 		

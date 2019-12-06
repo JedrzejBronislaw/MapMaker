@@ -28,7 +28,7 @@
                   <TextField fx:id="downThreshold" text="3" />
                </children>
             </VBox>
-            <VBox disable="true" spacing="5.0">
+            <VBox spacing="5.0">
                <children>
                   <Label text="Neighborhood:" />
                   <RadioButton fx:id="mooreNeighborhood" mnemonicParsing="false" selected="true" text="Moore">
