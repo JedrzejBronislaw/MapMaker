@@ -1,13 +1,22 @@
 package mapMaker;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.SceneAntialiasing;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import mapMaker.GeneratorManager.Generator;
 import mapMaker.controllers.MainWindowController;
@@ -41,7 +50,7 @@ public class App extends Application{
 		if (pane == null)
 			pane = new Pane();
 		
-		return new Scene(pane, 600, 400);
+		return new Scene(pane, 600, 400, true, SceneAntialiasing.DISABLED);
 	}
 
 	private Pane buildMainWindow() {
@@ -70,6 +79,26 @@ public class App extends Application{
 			MapViewer viewer = new MapViewer();
 			Canvas canvas = viewer.createView(map);
 			controller.setCanvas(canvas);
+			
+
+		});
+		
+		controller.setSaveCanvas(canvas -> {
+			Platform.runLater(() -> {
+				FileChooser chooser = new FileChooser();
+				
+				chooser.getExtensionFilters().add(new ExtensionFilter("PNG", "*.png"));
+				File file  = chooser.showSaveDialog(null);
+				
+				WritableImage wi = new WritableImage((int)canvas.getWidth(),(int)canvas.getHeight());
+				canvas.snapshot(null, wi);
+				BufferedImage im = SwingFXUtils.fromFXImage(wi, null);
+				try {
+					ImageIO.write(im, "png", file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});			
 		});
 		
 		

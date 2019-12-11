@@ -3,6 +3,7 @@ package mapMaker.viewers;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import mapMaker.map.Map;
 
 public class MapViewer {
@@ -17,7 +18,10 @@ public class MapViewer {
 		int h = map.getHeight();
 		canvas.setWidth(w*size);
 		canvas.setHeight(h*size);
-		
+//		Paint x = Color.AQUA;
+//		x.s
+//		c.setFill(x);
+//		
 		double x_, y_, w_, h_;
 		
 		c.setFill(Color.AQUA);

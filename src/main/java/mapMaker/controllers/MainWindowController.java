@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -41,13 +42,18 @@ public class MainWindowController implements Initializable{
 	@FXML
 	private ProgressBar progressbar;
 	
+	@FXML
+	private MenuItem saveImageMenuItem;
+
 	@Setter
 	private Consumer<Consumer<Float>> generate;
+	@Setter
+	private Consumer<Canvas> saveCanvas;
 	
-//	private Canvas canvas;
+	private Canvas canvas;
 	
 	public void setCanvas(Canvas canvas) {
-//		this.canvas = canvas;
+		this.canvas = canvas;
 		
 		Platform.runLater(() -> {
 			mapPane.getChildren().clear();
@@ -85,6 +91,11 @@ public class MainWindowController implements Initializable{
 		IntegerValidator intValidator = new IntegerValidator(10, 1000000);
 		intValidator.add(heightField);
 		intValidator.add(widthField);
+		
+		saveImageMenuItem.setOnAction(e -> {
+			if(canvas != null && saveCanvas != null)
+				saveCanvas.accept(canvas);
+		});
 	}
 
 	private void buildSelectGeneratorView() {
