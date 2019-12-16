@@ -44,5 +44,6 @@ public class Window {
 	
 	public void show() {
 		stage.show();
+		stage.toFront();
 	}
 }
